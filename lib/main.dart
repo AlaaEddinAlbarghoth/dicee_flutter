@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(
@@ -15,21 +16,28 @@ void main() {
   );
 }
 
-/* State less widget will refresh itself every time you hit save */
-class DicePage extends StatelessWidget {
+class DicePage extends StatefulWidget {
   const DicePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    var leftDicNo = 4;
+  State<DicePage> createState() => _DicePageState();
+}
 
+class _DicePageState extends State<DicePage> {
+  var leftDicNo = 1;
+  var rightDicNo = 1;
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Row(
         children: [
           Expanded(
             child: TextButton(
               onPressed: () {
-                print('left');
+                setState(() {
+                  leftDicNo = Random().nextInt(6) + 1;
+                });
               },
               child: Image.asset(
                   'images/dice$leftDicNo.png'), // String interpolation
@@ -38,9 +46,11 @@ class DicePage extends StatelessWidget {
           Expanded(
             child: TextButton(
               onPressed: () {
-                print('right');
+                setState(() {
+                  rightDicNo = Random().nextInt(6) + 1;
+                });
               },
-              child: Image.asset('images/dice1.png'),
+              child: Image.asset('images/dice$rightDicNo.png'),
             ),
           ),
         ],
