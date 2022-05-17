@@ -27,6 +27,13 @@ class _DicePageState extends State<DicePage> {
   var leftDicNo = 1;
   var rightDicNo = 1;
 
+  void changeDiceFace() {
+    setState(() {
+      leftDicNo = Random().nextInt(6) + 1;
+      rightDicNo = Random().nextInt(6) + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -35,9 +42,7 @@ class _DicePageState extends State<DicePage> {
           Expanded(
             child: TextButton(
               onPressed: () {
-                setState(() {
-                  leftDicNo = Random().nextInt(6) + 1;
-                });
+                changeDiceFace();
               },
               child: Image.asset(
                   'images/dice$leftDicNo.png'), // String interpolation
@@ -46,9 +51,7 @@ class _DicePageState extends State<DicePage> {
           Expanded(
             child: TextButton(
               onPressed: () {
-                setState(() {
-                  rightDicNo = Random().nextInt(6) + 1;
-                });
+                changeDiceFace();
               },
               child: Image.asset('images/dice$rightDicNo.png'),
             ),
